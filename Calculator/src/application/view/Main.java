@@ -11,8 +11,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("CalcScene.fxml"));
-        primaryStage.setTitle("Calculator biaaaatch");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Calculator");
+        primaryStage.setScene(new Scene(root, 381, 429));
+        primaryStage.setMaxHeight(460);
+        primaryStage.setMinHeight(460);
+        primaryStage.setMinWidth(400);
+        primaryStage.setMaxWidth(400);
+
         primaryStage.show();
     }
 
