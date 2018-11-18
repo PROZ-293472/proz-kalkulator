@@ -7,10 +7,21 @@ import javafx.scene.control.Alert.AlertType;
 import jdk.jshell.JShell;
 import jdk.jshell.SnippetEvent;
 
-public class JshellCalc {
 
+/**
+ * Klasa z pakietu model odpowiedzialna za tworzenie api aplikacji
+ * 
+ * @author Michal Szpunar 
+ *
+ */
+public class JshellCalc {
+	
+	
 	private final JShell jshell = JShell.create();
 
+	/**
+	 * Konstruktor klasy, w ktorym definiowane sa dodatkowe funkcjonalnosci pow i sqrt
+	 */
 	public JshellCalc() {
 		try {
 			jshell.eval("private double pow(double x, double y) { return Math.pow(x,y); }");
@@ -19,7 +30,13 @@ public class JshellCalc {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Glowna metoda obliczajaca
+	 * 
+	 * @param input - pole tekstowe kalkulatora
+	 * @return
+	 */
 	public String compute(String input) {
 
 		List<SnippetEvent> events = jshell.eval(input);
@@ -31,11 +48,20 @@ public class JshellCalc {
 
 	}
 	
+	/**
+	 * Metoda sprawdzajaca, czy wykonanie metody compute sie powiodlo
+	 * 
+	 * @param input - pole tekstowe kalkulatora
+	 * @return
+	 */
 	public boolean forbidden(String input) {
 		if (input == null) return true;
 		return false;
 	}
 	
+	/**
+	 * Metoda odpowiedzialna za wyswietlanie alertow
+	 */
 	public void showAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Blad");
