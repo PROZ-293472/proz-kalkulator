@@ -1,3 +1,2 @@
+module:Calculator
 application.controller
-application.model
-application.view

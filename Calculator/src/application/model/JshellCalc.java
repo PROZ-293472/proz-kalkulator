@@ -10,6 +10,8 @@ import jdk.jshell.SnippetEvent;
 
 /**
  * Klasa z pakietu model odpowiedzialna za tworzenie api aplikacji
+ * Zawiera metode compute odpowiedzialna za przetworzenie stringa wejsciowego zawierajacego dzialania arytmetyczne na wynik dzialania
+ * 
  * 
  * @author Michal Szpunar 
  *
@@ -35,29 +37,24 @@ public class JshellCalc {
 	 * Glowna metoda obliczajaca
 	 * 
 	 * @param input - pole tekstowe kalkulatora
-	 * @return
+	 * @return string zawierajacy wynik
+	 * @throws ArithmeticException w przypadku bledu obliczenia
 	 */
-	public String compute(String input) {
+	public String compute(String input) throws ArithmeticException {
 
 		List<SnippetEvent> events = jshell.eval(input);
 		for (SnippetEvent e : events)
 			if (e.causeSnippet() == null)
-				return e.value();
+				if(e.value() == null || e.value().equals("NaN") || e.value().equals("Infinity"))
+					throw new ArithmeticException();
+				else
+					return e.value();
 
 		return null;
 
 	}
 	
-	/**
-	 * Metoda sprawdzajaca, czy wykonanie metody compute sie powiodlo
-	 * 
-	 * @param input - pole tekstowe kalkulatora
-	 * @return
-	 */
-	public boolean forbidden(String input) {
-		if (input == null) return true;
-		return false;
-	}
+	
 	
 	/**
 	 * Metoda odpowiedzialna za wyswietlanie alertow

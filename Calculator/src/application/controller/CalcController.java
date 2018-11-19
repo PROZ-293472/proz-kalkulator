@@ -155,17 +155,15 @@ public class CalcController {
 	 *@param event
 	 */
 	@FXML
-	public void submit(ActionEvent event) {
-
-		txtFieldContent = api.compute(txtField.getText());
-
-		if (api.forbidden(txtFieldContent)) {
+	public void submit(ActionEvent event){
+		try {
+			txtFieldContent = api.compute(txtField.getText());	
+			txtField.setText(txtFieldContent);
+		}
+		catch (ArithmeticException exc) {
 			txtFieldContent = "0";
 			api.showAlert();
 		}
-
-		else
-			txtField.setText(txtFieldContent);
 		mem = actionMemory.aSub;
 
 	}
